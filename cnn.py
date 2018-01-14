@@ -22,12 +22,15 @@ from keras.layers import Dense
 classifier = Sequential()
 
 # Step 1 - Convolution
+# The input_shape is 64 x 64, but you can increase it to 128 x 128 if you have the processing power
 classifier.add(Convolution2D(32, 3, 3, input_shape = (64, 64, 3), activation = 'relu'))
 
 # Step 2 - Pooling
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
 # Adding a second convolutional layer
+# You can add more layers, but this might run into the problem of overfitting the dataset, and the result accuracy does nto increase by that much
+# However, the processing time increases by a lot. So it is not worth having more than 2 layers
 classifier.add(Convolution2D(32, 3, 3, activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
@@ -62,6 +65,7 @@ test_set = test_datagen.flow_from_directory('dataset/test_set',
                                             batch_size = 32,
                                             class_mode = 'binary')
 
+# Might take a long time to generate results depending on your processer speed, and whether you are using CPU or GPU
 classifier.fit_generator(training_set,
                          samples_per_epoch = 8000,
                          nb_epoch = 25,
