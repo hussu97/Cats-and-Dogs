@@ -12,3 +12,5 @@ Note: Application was tested in Spyder, which was a package in Anaconda Navigato
 
 conda install keras
 conda install tensorflow
+
+# Have fun with Machine learning
